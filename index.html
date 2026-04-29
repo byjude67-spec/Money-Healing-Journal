@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Money Healing Journal — Thrive Together Circle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --magenta:    #E8196A;
+  --magenta-mid:#B8144F;
+  --orange:     #E8902A;
+  --gold:       #C9952A;
+  --gold-lt:    #E8C060;
+  --berry:      #8B1A4A;
+  --berry-mid:  #6B2A3A;
+  --berry-muted:#A0506A;
+  --blush:      #FFF5F8;
+  --blush-mid:  #FDEAF0;
+  --on-vivid:   #FFE8F0;
+  --white:      #ffffff;
+  --grad-primary: linear-gradient(135deg, #E8196A 0%, #E8902A 100%);
+  --grad-alt:     linear-gradient(135deg, #E8902A 0%, #C9952A 60%, #E8196A 100%);
+  --gold-thread:  repeating-linear-gradient(45deg, rgba(201,149,42,0.18) 0px, rgba(201,149,42,0.18) 1px, transparent 1px, transparent 8px);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--blush);
+  min-height: 100vh;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--berry-mid);
+}
+
+/* ── JOURNAL WRAP ── */
+.journal-wrap { max-width: 940px; margin: 0 auto; padding-bottom: 4rem; }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  background: var(--grad-primary);
+  overflow: hidden;
+  text-align: center;
+  padding: 3.5rem 1.5rem 2.75rem;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--gold-thread);
+  pointer-events: none;
+}
+.hero-logo {
+  width: 64px; height: 64px;
+  background: rgba(255,255,255,0.18);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.25rem;
+  font-size: 28px;
+}
+.badge {
+  display: inline-block;
+  font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.72);
+  font-family: 'DM Sans', sans-serif; font-weight: 700;
+  margin-bottom: 1rem;
+}
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+  margin-bottom: 0.85rem;
+}
+.hero h1 em { font-style: italic; color: var(--gold-lt); }
+.hero p {
+  font-size: 13px; color: rgba(255,255,255,0.78);
+  max-width: 500px; margin: 0 auto;
+  line-height: 1.72; font-weight: 400;
+}
+
+/* ── TABS ── */
+.tabs-row {
+  display: flex; gap: 2px;
+  padding: 1.1rem 1.5rem 0;
+  overflow-x: auto; scrollbar-width: none;
+  border-bottom: 2px solid var(--blush-mid);
+  background: #fff;
+}
+.tabs-row::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700;
+  padding: 9px 18px;
+  border: none; border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  background: transparent;
+  color: var(--berry-muted);
+  cursor: pointer; white-space: nowrap;
+  transition: all 0.2s;
+}
+.tab-btn:hover { color: var(--berry); }
+.tab-btn.active { color: var(--magenta); border-bottom-color: var(--magenta); }
+
+.tab-content { display: none; padding: 2rem 1.5rem; background: #fff; }
+.tab-content.active { display: block; }
+
+/* ── SECTION LABEL ── */
+.section-label {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--magenta); font-weight: 700; font-family: 'DM Sans', sans-serif;
+  margin-bottom: 1rem;
+}
+.section-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(to right, rgba(232,25,106,0.25), transparent);
+}
+
+/* ── SAFETY BOX ── */
+.safety-box {
+  background: linear-gradient(135deg, rgba(232,25,106,0.05), rgba(232,144,42,0.05));
+  border: 1px solid rgba(232,25,106,0.2);
+  border-left: 3px solid var(--magenta);
+  border-radius: 10px; padding: 1.1rem 1.35rem;
+  margin-bottom: 2rem;
+}
+.safety-box p { font-size: 12px; color: var(--berry-mid); line-height: 1.85; }
+.safety-box strong { color: var(--magenta); }
+
+/* ── INFO CARDS ── */
+.start-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+
+.info-card {
+  background: var(--blush);
+  border: 1px solid rgba(232,25,106,0.12);
+  border-radius: 14px; padding: 1.5rem;
+}
+.info-card .icon { font-size: 22px; margin-bottom: 0.85rem; }
+.info-card h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem; font-weight: 400; color: var(--berry);
+  margin-bottom: 0.5rem;
+}
+.info-card h3 em { font-style: italic; color: var(--magenta); }
+.info-card p { font-size: 12px; color: var(--berry-muted); line-height: 1.72; }
+
+/* ── SCAN WHEEL ── */
+.wheel-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+
+.wheel-item {
+  background: var(--blush);
+  border: 1px solid rgba(139,26,74,0.1);
+  border-radius: 12px; padding: 0.9rem 1rem;
+}
+.wheel-item label { font-size: 11px; color: var(--berry-muted); display: block; margin-bottom: 8px; line-height: 1.4; font-weight: 500; }
+.wheel-item input[type=range] { width: 100%; accent-color: var(--magenta); cursor: pointer; }
+.wheel-score { font-size: 22px; font-weight: 400; color: var(--magenta); text-align: center; margin-top: 6px; font-family: 'DM Serif Display', serif; }
+
+/* ── PORTALS ── */
+.portals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1rem; }
+
+.portal-card {
+  background: var(--blush);
+  border: 1px solid rgba(139,26,74,0.1);
+  border-radius: 14px; padding: 1.35rem;
+  cursor: pointer; transition: all 0.25s;
+  position: relative; overflow: hidden;
+}
+.portal-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--portal-accent, var(--grad-primary));
+}
+.portal-card:hover { border-color: rgba(232,25,106,0.3); box-shadow: 0 4px 18px rgba(232,25,106,0.1); transform: translateY(-2px); }
+.portal-card.selected { border-color: var(--magenta); background: rgba(232,25,106,0.04); }
+
+.portal-emoji { font-size: 24px; margin-bottom: 0.6rem; }
+.portal-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem; font-weight: 400; color: var(--berry);
+  margin-bottom: 4px;
+}
+.portal-name em { font-style: italic; color: var(--magenta); }
+.portal-freq { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; font-weight: 700; font-family: 'DM Sans', sans-serif; }
+.portal-desc { font-size: 11px; color: var(--berry-muted); line-height: 1.6; }
+
+.portal-detail {
+  display: none; margin-top: 1.5rem;
+  background: var(--blush);
+  border: 1px solid rgba(139,26,74,0.12);
+  border-radius: 14px; padding: 1.5rem;
+}
+.portal-detail.show { display: block; }
+
+.portal-detail h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem; font-weight: 400; color: var(--berry);
+  margin-bottom: 0.6rem;
+}
+.portal-detail h3 em { font-style: italic; color: var(--magenta); }
+.portal-detail .teaching {
+  font-size: 12px; color: var(--berry-muted); line-height: 1.9;
+  margin-bottom: 1.25rem; font-style: italic;
+  border-left: 3px solid var(--magenta);
+  padding-left: 1rem;
+}
+.prompts-list { list-style: none; margin-bottom: 1.25rem; }
+.prompts-list li {
+  font-size: 13px; color: var(--berry-mid);
+  padding: 10px 0 10px 1.4rem; border-bottom: 1px solid rgba(139,26,74,0.07);
+  position: relative; line-height: 1.6;
+}
+.prompts-list li::before { content: '\2736'; font-size: 7px; color: var(--magenta); position: absolute; left: 0; top: 14px; }
+
+.ritual-box {
+  background: linear-gradient(135deg, rgba(232,25,106,0.06), rgba(232,144,42,0.06));
+  border: 1px solid rgba(232,25,106,0.18);
+  border-radius: 10px; padding: 1rem 1.25rem;
+}
+.ritual-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 6px; font-weight: 700; display: block; }
+.ritual-box p { font-size: 12px; color: var(--berry-mid); line-height: 1.8; }
+
+/* ── DAILY PRACTICE ── */
+.daily-spread { max-width: 680px; margin: 0 auto; }
+.spread-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.date-display { font-family: 'DM Serif Display', serif; font-size: 1.1rem; font-weight: 400; color: var(--berry-muted); }
+.week-num { font-family: 'DM Serif Display', serif; font-size: 0.95rem; color: var(--orange); font-style: italic; }
+
+.step-indicator { display: flex; gap: 7px; margin-bottom: 1.75rem; align-items: center; }
+.step-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blush-mid); transition: all 0.3s; flex-shrink: 0; border: 1px solid rgba(139,26,74,0.15); }
+.step-dot.done { background: var(--magenta); border-color: var(--magenta); }
+.step-dot.active { background: var(--orange); border-color: var(--orange); width: 22px; border-radius: 4px; }
+
+.journal-step { display: none; }
+.journal-step.active { display: block; }
+
+.step-num { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--magenta); margin-bottom: 6px; font-weight: 700; }
+.step-q {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem; font-weight: 400; color: var(--berry);
+  margin-bottom: 0.3rem; line-height: 1.25;
+}
+.step-q em { font-style: italic; color: var(--magenta); }
+.step-hint { font-size: 12px; color: var(--berry-muted); margin-bottom: 1rem; font-style: italic; line-height: 1.65; }
+
+.journal-textarea {
+  width: 100%; min-height: 130px;
+  background: var(--blush);
+  border: 1px solid rgba(139,26,74,0.15);
+  border-radius: 10px; padding: 1rem 1.1rem;
+  color: var(--berry-mid); font-family: 'DM Sans', sans-serif; font-size: 13px;
+  resize: vertical; line-height: 1.7; outline: none; transition: border-color 0.2s;
+}
+.journal-textarea:focus { border-color: rgba(232,25,106,0.45); }
+.journal-textarea::placeholder { color: var(--berry-muted); opacity: 0.6; }
+
+.somatic-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 0.85rem; }
+.somatic-tag {
+  font-size: 11px; padding: 6px 14px; font-weight: 500;
+  background: var(--blush);
+  border: 1px solid rgba(139,26,74,0.15);
+  border-radius: 50px; cursor: pointer; transition: all 0.2s;
+  color: var(--berry-muted);
+}
+.somatic-tag.selected { background: rgba(232,25,106,0.1); border-color: var(--magenta); color: var(--magenta); }
+
+.btn-row { display: flex; gap: 10px; margin-top: 1.25rem; }
+.btn-primary {
+  flex: 1; padding: 13px;
+  background: var(--grad-primary);
+  border: none; border-radius: 50px;
+  color: #fff; font-family: 'DM Sans', sans-serif;
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+  cursor: pointer; transition: opacity 0.2s; font-weight: 700;
+}
+.btn-primary:hover { opacity: 0.88; }
+.btn-secondary {
+  padding: 13px 20px; border-radius: 50px;
+  background: transparent;
+  border: 1.5px solid rgba(139,26,74,0.2);
+  color: var(--berry-muted); font-family: 'DM Sans', sans-serif;
+  font-size: 11px; cursor: pointer; transition: all 0.2s; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+}
+.btn-secondary:hover { border-color: var(--magenta); color: var(--magenta); }
+
+.integration-box {
+  background: linear-gradient(135deg, rgba(232,144,42,0.06), rgba(201,149,42,0.06));
+  border: 1px solid rgba(232,144,42,0.22);
+  border-left: 3px solid var(--orange);
+  border-radius: 8px; padding: 1rem 1.25rem; margin-top: 1.1rem;
+}
+.int-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 6px; font-weight: 700; display: block; }
+.integration-box p { font-size: 12px; color: var(--berry-muted); line-height: 1.72; }
+
+/* ── AI GUIDE ── */
+.gen-form { max-width: 620px; margin: 0 auto; }
+.form-group { margin-bottom: 1.35rem; }
+.form-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--magenta); margin-bottom: 7px; display: block; font-weight: 700; }
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: var(--blush);
+  border: 1px solid rgba(139,26,74,0.15);
+  border-radius: 10px; padding: 11px 15px;
+  color: var(--berry-mid); font-family: 'DM Sans', sans-serif; font-size: 13px;
+  outline: none; transition: border-color 0.2s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: rgba(232,25,106,0.45); }
+.form-select { appearance: none; cursor: pointer; }
+.form-input::placeholder, .form-textarea::placeholder { color: var(--berry-muted); opacity: 0.6; }
+.form-textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+
+.checkbox-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; }
+.checkbox-item {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--blush);
+  border: 1px solid rgba(139,26,74,0.12);
+  border-radius: 10px; padding: 9px 13px; cursor: pointer; transition: all 0.2s;
+}
+.checkbox-item:hover { border-color: rgba(232,25,106,0.3); }
+.checkbox-item.checked { background: rgba(232,25,106,0.07); border-color: rgba(232,25,106,0.35); }
+.checkbox-item span { font-size: 12px; color: var(--berry-muted); font-weight: 500; }
+.checkbox-item.checked span { color: var(--magenta); }
+.check-dot { width: 15px; height: 15px; border-radius: 4px; border: 1.5px solid rgba(139,26,74,0.2); flex-shrink: 0; transition: all 0.2s; }
+.checkbox-item.checked .check-dot { background: var(--magenta); border-color: var(--magenta); }
+
+.gen-btn {
+  width: 100%; padding: 15px;
+  background: var(--grad-primary);
+  border: none; border-radius: 50px;
+  color: #fff; font-family: 'DM Sans', sans-serif;
+  font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 700;
+  cursor: pointer; transition: opacity 0.2s; margin-top: 0.75rem;
+}
+.gen-btn:hover { opacity: 0.88; }
+.gen-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.gen-output {
+  margin-top: 1.75rem;
+  background: var(--blush);
+  border: 1px solid rgba(232,25,106,0.18);
+  border-radius: 14px; padding: 1.5rem;
+  display: none;
+}
+.gen-output.show { display: block; }
+.gen-output-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--magenta); margin-bottom: 1rem; font-weight: 700; }
+.gen-output-text { font-size: 13px; color: var(--berry-mid); line-height: 1.85; white-space: pre-wrap; }
+.loading-dots { display: flex; gap: 6px; align-items: center; padding: 0.5rem 0; }
+.loading-dots span { animation: blink 1.4s infinite; font-size: 18px; color: var(--magenta); }
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes blink { 0%,80%,100% { opacity: 0; } 40% { opacity: 1; } }
+
+.copy-btn {
+  margin-top: 1rem; padding: 8px 18px;
+  background: transparent; border: 1.5px solid rgba(139,26,74,0.2);
+  border-radius: 50px; color: var(--berry-muted); font-size: 11px;
+  font-family: 'DM Sans', sans-serif; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  cursor: pointer; transition: all 0.2s;
+}
+.copy-btn:hover { border-color: var(--magenta); color: var(--magenta); }
+
+/* ── INTEGRATION ── */
+.review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+.metric-card {
+  background: var(--blush);
+  border: 1px solid rgba(139,26,74,0.1);
+  border-radius: 14px; padding: 1.25rem;
+  text-align: center;
+}
+.metric-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--berry-muted); margin-bottom: 0.6rem; font-weight: 700; }
+.metric-value { font-family: 'DM Serif Display', serif; font-size: 2.5rem; font-weight: 400; color: var(--magenta); line-height: 1; }
+.metric-sub { font-size: 11px; color: var(--berry-muted); margin-top: 4px; }
+
+.strategy-box {
+  background: var(--blush);
+  border: 1px solid rgba(232,25,106,0.15);
+  border-left: 3px solid var(--magenta);
+  border-radius: 8px; padding: 1.1rem 1.35rem; margin-bottom: 1.1rem;
+}
+.strategy-box h4 { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--magenta); margin-bottom: 7px; font-weight: 700; }
+.strategy-box p { font-size: 12px; color: var(--berry-muted); line-height: 1.7; }
+.strategy-box .journal-textarea { margin-top: 0.85rem; min-height: 75px; }
+
+.action-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(139,26,74,0.07); }
+.action-check {
+  width: 20px; height: 20px; border-radius: 5px;
+  border: 1.5px solid rgba(232,25,106,0.3); flex-shrink: 0; margin-top: 1px;
+  cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.action-check.done { background: rgba(232,25,106,0.12); border-color: var(--magenta); }
+.action-check.done::after { content: '\2713'; font-size: 11px; color: var(--magenta); font-weight: 700; }
+.action-text { font-size: 13px; color: var(--berry-muted); line-height: 1.55; font-weight: 400; }
+.action-text.done-text { text-decoration: line-through; opacity: 0.4; }
+
+/* ── CLOSING RITUAL ── */
+.closing-ritual {
+  position: relative;
+  background: var(--grad-alt);
+  overflow: hidden;
+  border-radius: 16px; padding: 2rem 1.75rem;
+  margin-top: 2rem; text-align: center;
+}
+.closing-ritual::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--gold-thread); pointer-events: none;
+}
+.closing-ritual .ritual-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.72); margin-bottom: 0.9rem; font-weight: 700; display: block; }
+.closing-ritual p { font-size: 13.5px; color: rgba(255,255,255,0.88); line-height: 2; font-style: italic; font-family: 'DM Serif Display', serif; position: relative; z-index: 1; }
+.closing-ritual strong { color: #fff; font-style: normal; }
+
+/* ── JUDE SAYS ── */
+.jude-says {
+  background: linear-gradient(135deg, rgba(232,25,106,0.04), rgba(232,144,42,0.04));
+  border: 1px solid rgba(232,25,106,0.15);
+  border-left: 3px solid var(--magenta);
+  border-radius: 8px; padding: 1.1rem 1.35rem;
+  margin-bottom: 2rem;
+}
+.jude-says .jude-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--magenta); margin-bottom: 6px; font-weight: 700; display: block; }
+.jude-says p { font-size: 13px; color: var(--berry-mid); line-height: 1.75; font-style: italic; }
+
+@media (max-width: 600px) {
+  .wheel-container { grid-template-columns: repeat(2, 1fr); }
+  .checkbox-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="journal-wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-logo">🌸</div>
+    <div class="badge">Thrive Together Circle · Money Healing Journal</div>
+    <h1>Healing Your<br><em>Relationship with Money</em></h1>
+    <p>A gentle, sacred space for women to explore scarcity beliefs, reclaim worthiness, and open to receiving. You are allowed to take up space — financially and fully.</p>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs-row">
+    <button class="tab-btn active" onclick="showTab('start', this)">Begin Here</button>
+    <button class="tab-btn" onclick="showTab('portals', this)">The Portals</button>
+    <button class="tab-btn" onclick="showTab('daily', this)">Daily Practice</button>
+    <button class="tab-btn" onclick="showTab('generate', this)">AI Guide</button>
+    <button class="tab-btn" onclick="showTab('integrate', this)">Integration</button>
+  </div>
+
+  <!-- BEGIN HERE -->
+  <div id="tab-start" class="tab-content active">
+
+    <div class="jude-says">
+      <span class="jude-label">💛 A note from Jude</span>
+      <p>This journal is one of my most personal creations. Every prompt comes from something I have witnessed — in myself, and in the women of this community. You are not broken. You are healing. And you do not have to do it alone.</p>
+    </div>
+
+    <div class="safety-box">
+      <p><strong>A gentle note before you begin.</strong> Healing your relationship with money touches deep places — childhood, identity, survival. This journal is a compassionate companion, not a substitute for professional support. If old pain surfaces, please move slowly and reach out to a therapist or counsellor who understands trauma. You do not have to rush this healing. You are safe to go at your own pace.</p>
+    </div>
+
+    <span class="section-label">What is money shadow work?</span>
+    <div class="start-grid">
+      <div class="info-card">
+        <div class="icon">🌹</div>
+        <h3>The Money <em>Shadow</em></h3>
+        <p>Our relationship with money is shaped by what we were taught, witnessed, and told — often before we had words for it. Shame, fear, and unworthiness live quietly, driving our financial behaviour.</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">💛</div>
+        <h3>Money as <em>Mirror</em></h3>
+        <p>How you relate to money often reflects how you relate to yourself. Undercharging mirrors undervaluing. Refusing help mirrors difficulty receiving. The outer and inner are always in conversation.</p>
+      </div>
+      <div class="info-card">
+        <div class="icon">✨</div>
+        <h3>The <em>Journey</em></h3>
+        <p>6 portals. A daily practice. Gentle, evidence-based prompts that move you from scarcity to safety, from safety to worthiness, from worthiness to receiving. You are allowed to have more.</p>
+      </div>
+    </div>
+
+    <span class="section-label">Your Money Healing Scan — rate each area 1–10</span>
+    <div class="wheel-container" id="shadowWheel">
+      <div class="wheel-item"><label>Safety with Money</label><input type="range" min="1" max="10" value="5" oninput="updateScore(this)"><div class="wheel-score">5</div></div>
+      <div class="wheel-item"><label>Feeling Worthy of Wealth</label><input type="range" min="1" max="10" value="5" oninput="updateScore(this)"><div class="wheel-score">5</div></div>
+      <div class="wheel-item"><label>Ease with Receiving</label><input type="range" min="1" max="10" value="5" oninput="updateScore(this)"><div class="wheel-score">5</div></div>
+      <div class="wheel-item"><label>Charging Your True Worth</label><input type="range" min="1" max="10" value="5" oninput="updateScore(this)"><div class="wheel-score">5</div></div>
+      <div class="wheel-item"><label>Body Safety Around Money</label><input type="range" min="1" max="10" value="5" oninput="updateScore(this)"><div class="wheel-score">5</div></div>
+      <div class="wheel-item"><label>Permission to Desire More</label><input type="range" min="1" max="10" value="5" oninput="updateScore(this)"><div class="wheel-score">5</div></div>
+    </div>
+
+    <div class="strategy-box">
+      <h4>Your Healing Scan Insight</h4>
+      <p id="scanInsight">Move the sliders above to explore where you are today. Lower scores reveal where the deepest healing wants to happen. Begin with your lowest score portal — it chose you first.</p>
+    </div>
+  </div>
+
+  <!-- PORTALS -->
+  <div id="tab-portals" class="tab-content">
+    <span class="section-label">Select a portal to explore its prompts and integration ritual</span>
+    <div class="portals-grid" id="portalsGrid">
+      <div class="portal-card" style="--portal-accent: var(--grad-primary)" onclick="selectPortal(this, 'scarcity')">
+        <div class="portal-emoji">🌑</div>
+        <div class="portal-name">Scarcity <em>&amp; Fear</em></div>
+        <div class="portal-freq" style="color:var(--magenta)">396 Hz — Liberation from Fear</div>
+        <div class="portal-desc">The belief that there is never enough — money, time, safety, love.</div>
+      </div>
+      <div class="portal-card" style="--portal-accent: var(--grad-alt)" onclick="selectPortal(this, 'worthiness')">
+        <div class="portal-emoji">💛</div>
+        <div class="portal-name">Worthiness <em>&amp; Deserving</em></div>
+        <div class="portal-freq" style="color:var(--orange)">528 Hz — Love &amp; Transformation</div>
+        <div class="portal-desc">The deep belief that you must earn your place — financially and otherwise.</div>
+      </div>
+      <div class="portal-card" style="--portal-accent: var(--grad-primary)" onclick="selectPortal(this, 'receiving')">
+        <div class="portal-emoji">🌸</div>
+        <div class="portal-name">Receiving <em>&amp; Allowing</em></div>
+        <div class="portal-freq" style="color:var(--magenta)">639 Hz — Connection &amp; Openness</div>
+        <div class="portal-desc">The difficulty letting money, help, love, and good things actually land.</div>
+      </div>
+      <div class="portal-card" style="--portal-accent: var(--grad-alt)" onclick="selectPortal(this, 'shame')">
+        <div class="portal-emoji">🕯️</div>
+        <div class="portal-name">Money <em>Shame &amp; Guilt</em></div>
+        <div class="portal-freq" style="color:var(--orange)">417 Hz — Undoing Situations</div>
+        <div class="portal-desc">Shame around wanting more, having more, or never having enough.</div>
+      </div>
+      <div class="portal-card" style="--portal-accent: var(--grad-primary)" onclick="selectPortal(this, 'charging')">
+        <div class="portal-emoji">💎</div>
+        <div class="portal-name">Charging <em>Your Worth</em></div>
+        <div class="portal-freq" style="color:var(--magenta)">741 Hz — Expression &amp; Solutions</div>
+        <div class="portal-desc">Undercharging, over-delivering, apologising for your prices.</div>
+      </div>
+      <div class="portal-card" style="--portal-accent: var(--grad-alt)" onclick="selectPortal(this, 'safety')">
+        <div class="portal-emoji">🌿</div>
+        <div class="portal-name">Safety <em>&amp; Abundance</em></div>
+        <div class="portal-freq" style="color:var(--orange)">963 Hz — Divine Connection</div>
+        <div class="portal-desc">Learning to feel safe as money grows — the nervous system's deepest work.</div>
+      </div>
+    </div>
+    <div class="portal-detail" id="portalDetail"></div>
+  </div>
+
+  <!-- DAILY PRACTICE -->
+  <div id="tab-daily" class="tab-content">
+    <div class="daily-spread">
+      <div class="spread-header">
+        <div class="date-display" id="dailyDate"></div>
+        <div class="week-num">Week 1 &middot; Day 1</div>
+      </div>
+
+      <div class="step-indicator">
+        <div class="step-dot active"></div>
+        <div class="step-dot"></div>
+        <div class="step-dot"></div>
+        <div class="step-dot"></div>
+        <div class="step-dot"></div>
+        <div class="step-dot"></div>
+        <div class="step-dot"></div>
+      </div>
+
+      <div class="journal-step active" id="jstep0">
+        <div class="step-num">Step 1 of 7 &middot; Noticing</div>
+        <div class="step-q">What money moment <em>activated you</em> today?</div>
+        <div class="step-hint">Checking your bank balance, a bill arriving, pricing something, someone talking about money, a moment of wanting something you felt you couldn't have...</div>
+        <textarea class="journal-textarea" placeholder="Today I felt something shift around money when..." id="j0"></textarea>
+      </div>
+
+      <div class="journal-step" id="jstep1">
+        <div class="step-num">Step 2 of 7 &middot; The Story</div>
+        <div class="step-q">What did you <em>tell yourself</em> in that moment?</div>
+        <div class="step-hint">The voice that spoke up — about you, about money, about what is possible for you...</div>
+        <textarea class="journal-textarea" placeholder="The story I told myself was... / I heard myself think..." id="j1"></textarea>
+      </div>
+
+      <div class="journal-step" id="jstep2">
+        <div class="step-num">Step 3 of 7 &middot; Body</div>
+        <div class="step-q">Where did you <em>feel it</em> in your body?</div>
+        <div class="step-hint">Our bodies hold our money stories long before our minds can name them. Select what you noticed, then describe the sensation.</div>
+        <div class="somatic-row">
+          <div class="somatic-tag" onclick="toggleTag(this)">Chest tightness</div>
+          <div class="somatic-tag" onclick="toggleTag(this)">Throat constricting</div>
+          <div class="somatic-tag" onclick="toggleTag(this)">Stomach drop</div>
+          <div class="somatic-tag" onclick="toggleTag(this)">Shoulders tensing</div>
+          <div class="somatic-tag" onclick="toggleTag(this)">Holding my breath</div>
+          <div class="somatic-tag" onclick="toggleTag(this)">Heat or flushing</div>
+          <div class="somatic-tag" onclick="toggleTag(this)">Going numb</div>
+          <div class="somatic-tag" onclick="toggleTag(this)">Feeling small</div>
+        </div>
+        <textarea class="journal-textarea" placeholder="The sensation in my body felt like..." id="j2" style="min-height:90px;"></textarea>
+      </div>
+
+      <div class="journal-step" id="jstep3">
+        <div class="step-num">Step 4 of 7 &middot; Roots</div>
+        <div class="step-q">Where did you <em>first learn</em> this about money?</div>
+        <div class="step-hint">Let a memory come gently — it might be something said, something witnessed, something felt. You don't have to force it.</div>
+        <textarea class="journal-textarea" placeholder="I think I first learned this when... / This feeling reminds me of..." id="j3"></textarea>
+      </div>
+
+      <div class="journal-step" id="jstep4">
+        <div class="step-num">Step 5 of 7 &middot; Protection</div>
+        <div class="step-q">What was this belief <em>trying to protect</em> you from?</div>
+        <div class="step-hint">Every money belief made sense when it was formed. What threat did it guard against? Rejection, conflict, loss, standing out, being abandoned?</div>
+        <textarea class="journal-textarea" placeholder="This belief protected younger me from..." id="j4"></textarea>
+      </div>
+
+      <div class="journal-step" id="jstep5">
+        <div class="step-num">Step 6 of 7 &middot; Compassion</div>
+        <div class="step-q">What does your <em>wiser, loving self</em> want to say?</div>
+        <div class="step-hint">Speak to her with the warmth you would offer a dear friend. She did her best with what she knew.</div>
+        <textarea class="journal-textarea" placeholder="Sweetheart, I want you to know that... / You don't have to carry this anymore because..." id="j5"></textarea>
+      </div>
+
+      <div class="journal-step" id="jstep6">
+        <div class="step-num">Step 7 of 7 &middot; One New Truth</div>
+        <div class="step-q">What <em>new belief</em> about money feels more true today?</div>
+        <div class="step-hint">Not toxic positivity — a genuinely gentler truth you can reach. Even just slightly softer counts.</div>
+        <textarea class="journal-textarea" placeholder="A more compassionate truth I can hold today is..." id="j6"></textarea>
+        <div class="integration-box" style="margin-top:1rem;">
+          <span class="int-label">Carrying It Forward</span>
+          <p>After all 7 steps, visit the Integration tab to anchor this insight into a gentle daily practice or real-world action. Small shifts, held consistently, rewrite the story.</p>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-secondary" id="prevBtn" onclick="navStep(-1)" style="display:none;">&larr; Back</button>
+        <button class="btn-primary" id="nextBtn" onclick="navStep(1)">Next step &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI GUIDE -->
+  <div id="tab-generate" class="tab-content">
+    <div class="gen-form">
+      <p style="font-size:13px;color:var(--berry-muted);margin-bottom:1.75rem;line-height:1.8;">Tell the guide where you are, and she will generate personalised prompts, integration practices, or compassionate dialogues — tailored gently to your healing season right now.</p>
+
+      <div class="form-group">
+        <label class="form-label">Your name (optional)</label>
+        <input type="text" class="form-input" id="genName" placeholder="How the guide should speak to you...">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Which portal is calling you?</label>
+        <select class="form-select" id="genPortal">
+          <option value="">Choose your portal...</option>
+          <option value="scarcity">🌑 Scarcity &amp; Fear</option>
+          <option value="worthiness">💛 Worthiness &amp; Deserving</option>
+          <option value="receiving">🌸 Receiving &amp; Allowing</option>
+          <option value="shame">🕯️ Money Shame &amp; Guilt</option>
+          <option value="charging">💎 Charging Your Worth</option>
+          <option value="safety">🌿 Safety &amp; Abundance</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">What is alive for you around money right now?</label>
+        <textarea class="form-textarea" id="genContext" placeholder="e.g. I froze when asked my price. I feel guilty wanting more. I cannot look at my bank account. I helped someone all day and charged nothing..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">What would feel most supportive right now?</label>
+        <div class="checkbox-grid" id="genTypes">
+          <div class="checkbox-item checked" onclick="toggleCheck(this)"><div class="check-dot"></div><span>5 gentle journal prompts</span></div>
+          <div class="checkbox-item" onclick="toggleCheck(this)"><div class="check-dot"></div><span>A somatic integration ritual</span></div>
+          <div class="checkbox-item" onclick="toggleCheck(this)"><div class="check-dot"></div><span>A compassionate reframe</span></div>
+          <div class="checkbox-item" onclick="toggleCheck(this)"><div class="check-dot"></div><span>Letter from future self</span></div>
+          <div class="checkbox-item" onclick="toggleCheck(this)"><div class="check-dot"></div><span>Inner child dialogue</span></div>
+          <div class="checkbox-item" onclick="toggleCheck(this)"><div class="check-dot"></div><span>A new money story</span></div>
+        </div>
+      </div>
+
+      <button class="gen-btn" id="genBtn" onclick="generatePrompts()">&#10022; Receive Your Guidance &#10022;</button>
+
+      <div class="gen-output" id="genOutput">
+        <div class="gen-output-label">Your Personalised Money Healing</div>
+        <div class="gen-output-text" id="genText"></div>
+        <button class="copy-btn" onclick="copyOutput()" id="copyBtn" style="display:none;">Copy to journal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTEGRATION -->
+  <div id="tab-integrate" class="tab-content">
+    <span class="section-label">Weekly Healing Checkpoint</span>
+
+    <div class="review-grid">
+      <div class="metric-card">
+        <div class="metric-label">Days Practised</div>
+        <div class="metric-value" id="dayCount">0</div>
+        <div class="metric-sub">of 7 this week</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Portals Visited</div>
+        <div class="metric-value" id="portalCount">0</div>
+        <div class="metric-sub">of 6 available</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Shifts Completed</div>
+        <div class="metric-value" id="actionCount">0</div>
+        <div class="metric-sub">this week</div>
+      </div>
+    </div>
+
+    <span class="section-label">Reflection: What surfaced this week?</span>
+    <div class="strategy-box">
+      <h4>Recurring Pattern</h4>
+      <p>What money belief or feeling showed up most this week? What activated you most strongly?</p>
+      <textarea class="journal-textarea" placeholder="This week, the pattern I noticed most was..."></textarea>
+    </div>
+
+    <div class="strategy-box">
+      <h4>A Gentler Truth I Am Choosing</h4>
+      <p>What new belief, even a slightly softer one, are you willing to try on this coming week?</p>
+      <textarea class="journal-textarea" placeholder="This week, I am choosing to practice believing..."></textarea>
+    </div>
+
+    <span class="section-label">Gentle integration actions</span>
+    <div id="actionList">
+      <div class="action-item"><div class="action-check" onclick="toggleAction(this)"></div><div class="action-text">Complete your daily 7-step money healing practice</div></div>
+      <div class="action-item"><div class="action-check" onclick="toggleAction(this)"></div><div class="action-text">Open your bank account and breathe — without judgment, without fixing</div></div>
+      <div class="action-item"><div class="action-check" onclick="toggleAction(this)"></div><div class="action-text">Say your price aloud to yourself, slowly, until it feels steadier</div></div>
+      <div class="action-item"><div class="action-check" onclick="toggleAction(this)"></div><div class="action-text">Receive one compliment, offer, or act of help fully — without deflecting</div></div>
+      <div class="action-item"><div class="action-check" onclick="toggleAction(this)"></div><div class="action-text">Write one thing you are allowed to want financially — without qualifying it</div></div>
+      <div class="action-item"><div class="action-check" onclick="toggleAction(this)"></div><div class="action-text">Place a hand on your heart and say: "I am safe. I am worthy. Money is allowed to flow to me."</div></div>
+    </div>
+
+    <div class="closing-ritual">
+      <span class="ritual-label">Closing Blessing</span>
+      <p>
+        "I release what was never mine to carry.<br>
+        I am open to receive.<br>
+        I am worthy — not because of what I earn,<br>
+        but because of <strong>who I am.</strong>"
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showTab(name, btn) {
+  var contents = document.querySelectorAll('.tab-content');
+  var buttons = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < contents.length; i++) {
+    contents[i].classList.remove('active');
+  }
+  for (var j = 0; j < buttons.length; j++) {
+    buttons[j].classList.remove('active');
+  }
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+function updateScore(input) {
+  input.closest('.wheel-item').querySelector('.wheel-score').textContent = input.value;
+  updateScanInsight();
+}
+
+function updateScanInsight() {
+  var sliders = document.querySelectorAll('#shadowWheel input[type=range]');
+  var labels = ['Safety with Money', 'Feeling Worthy of Wealth', 'Ease with Receiving', 'Charging Your True Worth', 'Body Safety Around Money', 'Permission to Desire More'];
+  var min = 10;
+  var minLabel = '';
+  for (var i = 0; i < sliders.length; i++) {
+    var val = parseInt(sliders[i].value);
+    if (val < min) {
+      min = val;
+      minLabel = labels[i];
+    }
+  }
+  document.getElementById('scanInsight').textContent = 'Your deepest healing is calling in: ' + minLabel + ' (score: ' + min + '). This is where to begin — not because something is wrong with you, but because this part has been waiting the longest to be seen.';
+}
+
+var portalData = {
+  scarcity: {
+    name: 'Scarcity & Fear',
+    emoji: '🌑',
+    teaching: 'Scarcity is not a personality flaw — it is a nervous system response learned in environments where there was not enough safety, love, money, or stability. The scarcity shadow whispers "never enough" not to hurt you, but because it is still trying to protect a younger version of you who genuinely did not have enough. This portal is about meeting that younger self with compassion, not pushing her away.',
+    prompts: [
+      'What is the earliest memory of "not enough" — money, food, safety, love, time? Let it come gently.',
+      'What does scarcity feel like in your body when it activates? Where does it live? What does it say?',
+      'Finish this sentence slowly: "If I run out of money, then I will..." Follow that thought all the way to the fear underneath.',
+      'When you imagine having more than enough, what uncomfortable feelings arise? What do those feelings tell you?',
+      'What rules did your family have about money that you still carry in your body today? Which ones are you ready to gently question?',
+      'Write a letter to Scarcity. Thank her for what she protected you from. Then tell her what has changed.',
+      'What would feel true to think about money if you knew you were truly, fundamentally safe?'
+    ],
+    ritual: 'Enough Inventory — Each evening this week, write three things that were "enough" today: enough food, enough warmth, enough connection. Not to bypass grief, but to begin slowly retraining the nervous system toward evidence of safety. Then place one hand on your belly, breathe slowly, and say aloud: "In this moment, I have enough. I am enough."'
+  },
+  worthiness: {
+    name: 'Worthiness & Deserving',
+    emoji: '💛',
+    teaching: 'Unworthiness is one of the most common and most quietly devastating money wounds in women. We were taught — through words, through silence, through watching — that we must earn our place. That we must justify wanting. That desire itself needs to be apologised for. Integration here is not about "becoming worthy." You already are. This portal is about discovering what made you believe otherwise.',
+    prompts: [
+      'Finish the sentence: "I am allowed to want more money when..." — notice the condition you placed on your own permission.',
+      'Who do you imagine judging you if you became wealthy? Describe them. What specifically are they saying?',
+      'When you charge full price (or imagine charging it), what feeling arises? Where does it live in your body?',
+      'What messages — spoken or unspoken — did you receive as a girl about women and money? About women who wanted too much?',
+      'Write about a time you settled for less than you deserved — financially or otherwise. What made that feel like the safe choice?',
+      'If you truly believed you deserved financial ease without having to earn it through suffering, what would change in how you show up in the world?',
+      'What does "worthy" mean to you? Who taught you that definition? Is it actually yours?'
+    ],
+    ritual: 'Worth Declaration Practice — Each morning before any screen time, stand somewhere you feel safe and say your full name aloud, followed by: "I am worthy of receiving. I am worthy of ease. I am worthy of more than I have been claiming." Notice the resistance. Do not fight it — just breathe into it. Do this every day for one week and journal what shifts.'
+  },
+  receiving: {
+    name: 'Receiving & Allowing',
+    emoji: '🌸',
+    teaching: 'Many women find giving natural and receiving almost unbearable. Compliments get deflected. Help gets refused. Money feels charged with obligation. This is not a character flaw — it is often a protective strategy learned when receiving came with strings, conditions, or cost. The work here is learning — slowly, safely — that receiving does not always mean owing. That you are allowed to let good things land.',
+    prompts: [
+      'When someone offers you a compliment, what do you immediately want to do? Where do you feel the discomfort?',
+      'Think of a time someone offered to help you financially — pay for something, give you a gift, support your work. What arose in you? Was it easy to receive?',
+      'What do you fear would happen if you received freely and easily — money, love, rest, support?',
+      'Where might you have learned that receiving means owing? That generosity comes with conditions?',
+      'What kinds of receiving feel easier for you? What makes them different from the kinds that feel hard?',
+      'Practice in writing: "I am open to receive ___." Write 10 endings to that sentence. Notice which ones feel impossible.',
+      'What would a woman who receives freely and easily look, feel, and move like? Can you let her be a part of you?'
+    ],
+    ritual: 'The Receiving Practice — This week, when someone offers you something — a compliment, a held door, a gift — practise pausing before deflecting. Take one breath. Then simply say "thank you" and allow it to land. Place a hand on your heart as you do. At the end of each day, note one thing you received and how it felt. Receiving is a skill. You are learning it.'
+  },
+  shame: {
+    name: 'Money Shame & Guilt',
+    emoji: '🕯️',
+    teaching: 'Money shame is epidemic, especially in women. Shame for not having enough. Shame for wanting more. Shame for spending. Shame for earning. Shame for not knowing how it all works. Shame is the belief that something is wrong with us — not just our behaviour, but our fundamental self. This portal brings a candle to the dark: you are not broken. You were shaped by systems, families, and cultures that gave money a weight it was never meant to carry alone.',
+    prompts: [
+      'Complete honestly: "I feel ashamed when it comes to money because..." Write for five minutes without stopping.',
+      'What is the money situation you would be most afraid for someone to see? What does the shame say that means about you?',
+      'Where do you judge other women around money — for having too much, spending irresponsibly, charging a lot, not earning enough? What does that mirror in you?',
+      'What would it mean about you if you never got your finances together? Follow that fear to its root.',
+      'What do you wish someone had taught you about money when you were young? What would have changed?',
+      'Write a compassionate letter to your past self at a time she felt ashamed about money. What does she need to hear?',
+      'Imagine money shame as a feeling rather than a truth. What would you do differently if shame could not stop you?'
+    ],
+    ritual: 'Shame Naming and Release — Write one specific money shame you carry on a piece of paper. Say it aloud — just once, to yourself or to a trusted witness. Notice what happens in your body. Then write beneath it: "This shame is not the truth of who I am. I was doing my best with what I had." Fold the paper, hold it to your heart, and decide whether to release it by tearing it up, burning it safely, or keeping it to witness your own healing.'
+  },
+  charging: {
+    name: 'Charging Your Worth',
+    emoji: '💎',
+    teaching: 'Undercharging is not a pricing problem — it is a worthiness problem wrapped in a practical decision. For many women, it is also rooted in care: we do not want to exclude people, to seem greedy, to be one of those people. But chronically undercharging is a form of self-abandonment. You cannot pour from depletion. And the people who benefit from your work deserve a version of you who feels valued, not resentful.',
+    prompts: [
+      'What is your honest, true price — the one that would feel fair, sustainable, and nourishing? Write it down without qualifying it.',
+      'What story do you tell yourself to justify charging less? Name the voice precisely.',
+      'Who are you afraid will react badly if you raise your prices? Describe them. What specifically do they say?',
+      'Finish the sentence: "Charging what I am really worth would mean..." Write at least five endings.',
+      'Where else in your life do you undercharge — giving more time, more energy, more care than is sustainable?',
+      'What would you tell your best friend if she were charging half of what her work is worth and burning herself out?',
+      'What would change in your life and work if money flowed to you in proportion to the genuine value you offer?'
+    ],
+    ritual: 'The Price Practice — Write your current price for something you offer (or imagine an offering). Then write the price that would feel truly generous to you. Say that higher price aloud — slowly, three times. Notice the discomfort. Breathe through it without changing the number. Then write: "This price is an act of self-respect. I am allowed to be compensated fully." This week, take one tiny step toward that number.'
+  },
+  safety: {
+    name: 'Safety & Abundance',
+    emoji: '🌿',
+    teaching: 'For many women, the work is not only about getting more money — it is about learning to feel safe as money grows. Patterns like self-sabotage, sudden spending after earning, or anxiety when things go well are often the nervous system attempting to return to the familiar. Abundance, if it was not part of your earliest experience, can feel genuinely threatening. This portal is about gently, somatically teaching your body that it is safe to have more.',
+    prompts: [
+      'When things are going well financially, do you feel relaxed — or do you feel yourself waiting for it to collapse? Describe that internal experience.',
+      'Has there ever been a time when having more money created a problem — conflict, expectations, complexity? How did that shape what you believe more means?',
+      'What is your earliest positive memory involving money or material safety? Let yourself feel it.',
+      'Imagine your bank account is healthy and growing steadily. What feelings arise — and in what order? Be honest.',
+      'What have you told yourself about people who are financially abundant? Do you want to be seen that way?',
+      'What does your version of enough truly look like — not what you have been told to want, but what would actually feel like ease and freedom to you?',
+      'Write a letter from your future self who lives in financial ease. What does she want you to know about the journey?'
+    ],
+    ritual: 'Abundance Anchoring — Each morning, name one form of abundance that already exists in your life — warmth, connection, beauty, food, breath. This is not about bypassing real lack. It is about teaching your nervous system to also register safety when it is present. Then close your eyes and ask your body: "What would it feel like to be safe with more?" Breathe into any answer that comes.'
+  }
+};
+
+function selectPortal(card, key) {
+  var cards = document.querySelectorAll('.portal-card');
+  for (var i = 0; i < cards.length; i++) {
+    cards[i].classList.remove('selected');
+  }
+  card.classList.add('selected');
+
+  var d = portalData[key];
+  var promptsHTML = '';
+  for (var p = 0; p < d.prompts.length; p++) {
+    promptsHTML += '<li>' + d.prompts[p] + '</li>';
+  }
+
+  var detail = document.getElementById('portalDetail');
+  detail.innerHTML =
+    '<h3>' + d.emoji + ' ' + d.name + '</h3>' +
+    '<div class="teaching">' + d.teaching + '</div>' +
+    '<span class="section-label">Healing Prompts</span>' +
+    '<ul class="prompts-list">' + promptsHTML + '</ul>' +
+    '<div class="ritual-box">' +
+    '<span class="ritual-label">Integration Ritual</span>' +
+    '<p>' + d.ritual + '</p>' +
+    '</div>';
+  detail.classList.add('show');
+  detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+var currentStep = 0;
+var totalSteps = 7;
+
+function navStep(dir) {
+  var steps = document.querySelectorAll('.journal-step');
+  var dots = document.querySelectorAll('.step-dot');
+  steps[currentStep].classList.remove('active');
+  dots[currentStep].classList.remove('active');
+  dots[currentStep].classList.add('done');
+
+  currentStep = Math.max(0, Math.min(totalSteps - 1, currentStep + dir));
+
+  steps[currentStep].classList.add('active');
+  for (var i = 0; i < dots.length; i++) {
+    dots[i].classList.remove('active', 'done');
+    if (i < currentStep) {
+      dots[i].classList.add('done');
+    } else if (i === currentStep) {
+      dots[i].classList.add('active');
+    }
+  }
+  document.getElementById('prevBtn').style.display = currentStep > 0 ? 'block' : 'none';
+  document.getElementById('nextBtn').textContent = currentStep === totalSteps - 1 ? 'Complete \u2736' : 'Next step \u2192';
+}
+
+function toggleTag(el) {
+  el.classList.toggle('selected');
+}
+
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+}
+
+function toggleAction(check) {
+  check.classList.toggle('done');
+  check.nextElementSibling.classList.toggle('done-text');
+  document.getElementById('actionCount').textContent = document.querySelectorAll('.action-check.done').length;
+}
+
+function copyOutput() {
+  var text = document.getElementById('genText').textContent;
+  navigator.clipboard.writeText(text).then(function() {
+    var btn = document.getElementById('copyBtn');
+    btn.textContent = 'Copied \u2713';
+    setTimeout(function() { btn.textContent = 'Copy to journal'; }, 2000);
+  });
+}
+
+async function generatePrompts() {
+  var name = document.getElementById('genName').value;
+  var portal = document.getElementById('genPortal').value;
+  var context = document.getElementById('genContext').value;
+  var checked = [];
+  var items = document.querySelectorAll('.checkbox-item.checked span');
+  for (var i = 0; i < items.length; i++) {
+    checked.push(items[i].textContent);
+  }
+
+  if (!portal && !context) {
+    alert('Please select a portal or share a little about what is alive for you.');
+    return;
+  }
+
+  var btn = document.getElementById('genBtn');
+  var output = document.getElementById('genOutput');
+  var genText = document.getElementById('genText');
+  btn.disabled = true;
+  output.classList.add('show');
+  genText.innerHTML = '<div class="loading-dots"><span>\u25C6</span><span>\u25C6</span><span>\u25C6</span></div>';
+  document.getElementById('copyBtn').style.display = 'none';
+
+  var portalEntry = portalData[portal];
+  var portalName = portalEntry ? portalEntry.name : 'general money healing';
+  var addressing = name ? 'You are writing for ' + name + '.' : 'You are writing for a woman.';
+  var requested = checked.length ? checked.join(', ') : '5 gentle journal prompts';
+
+  try {
+    var response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: 'You are a deeply compassionate, trauma-informed money healing guide for women in the Thrive Together Circle community, founded by Jude Hill. Your voice is warm, gentle, and grounded — never toxic-positive, never shaming, never prescriptive. You understand that women\'s relationship with money is shaped by family systems, intergenerational patterns, and nervous system responses. You blend somatic awareness, inner child work, and genuine financial wisdom. You never pathologise; you always hold both the tenderness of healing and the reality of material life. Your language is soft but not saccharine. Honest but never harsh. You make women feel seen, not fixed. Key themes: scarcity beliefs, worthiness, receiving, shame, undercharging, self-abandonment, safety. You always remind her: she is not broken. She is healing. The community mantra is: Clarity, Connection and Support.',
+        messages: [{
+          role: 'user',
+          content: addressing + ' She is working with the portal: ' + portalName + '.\n\nWhat is alive for her right now: ' + (context || 'general money healing and relationship with abundance') + '\n\nPlease generate the following (only what is requested, beautifully formatted): ' + requested + '\n\nWrite with a trauma-informed, compassionate tone. Prompts should go gently beneath the surface. Name the likely wound beneath the behaviour. Connect the inner healing to outer, practical life. End with one small, embodied gesture she can do right now — nothing overwhelming.'
+        }]
+      })
+    });
+    var data = await response.json();
+    genText.textContent = (data.content && data.content[0] && data.content[0].text) ? data.content[0].text : 'The guide is resting. Please try again gently.';
+    document.getElementById('copyBtn').style.display = 'inline-block';
+  } catch (e) {
+    genText.textContent = 'Something interrupted the connection. Please try again when you are ready.';
+  }
+  btn.disabled = false;
+}
+
+// Init
+var now = new Date();
+document.getElementById('dailyDate').textContent = now.toLocaleDateString('en-GB', { weekday: 'long', month: 'long', day: 'numeric' });
+</script>
+</body>
+</html>
